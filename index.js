@@ -24,9 +24,14 @@ app.get('/api/:date', (req, res) => {
   if (dateString === "") {
     dateString = new Date();
   }
+  const dateNum = parseInt(dateString);
   const dateObj = new Date(dateString);
   if (isNaN(dateObj.getTime())) {
-    return res.status(400).json({ error: 'Invalid Date' });
+    const Dated = new Date(dateNum);
+    const dates = Dated.toUTCString();
+    console.log(dates);
+    res.json({ unix:dateNum, utc: dates });
+    
   }
   const unixTimestamp = dateObj.getTime();
   const utcString = dateObj.toUTCString();
