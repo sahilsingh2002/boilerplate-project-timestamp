@@ -26,6 +26,9 @@ app.get('/api/:date', (req, res) => {
   }
   const dateNum = parseInt(dateString);
   const dateObj = new Date(dateString);
+  if(isNaN(dateNum)){
+    res.json({error:"invalid date"});
+  }
   if (isNaN(dateObj.getTime())) {
     const Dated = new Date(dateNum);
     const dates = Dated.toUTCString();
